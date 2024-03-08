@@ -1,3 +1,4 @@
+import com.github.ajalt.mordant.terminal.Terminal
 import kotlin.random.Random
 
 /**
@@ -29,7 +30,7 @@ fun main() {
     )
 
     // Generación aleatoria del número de elementos para cada jugador
-    val aleatorio1 = Random.nextInt(1, 4)
+    val aleatorio1 = Random.nextInt(2, 5)
 
 
 
@@ -40,7 +41,7 @@ fun main() {
 
 
     // Generación aleatoria de vida para cada jugador
-    val aleatorio2 = Random.nextInt(899, 999)
+    val aleatorio2 = Random.nextInt(3, 6)
     // Creación de los jugadores con sus respectivas listas de objetos aleatorios
     val jugador1 = Jugador("Fran", aleatorio2, listaItemsJugador1)
     val jugador2 = Jugador("Andres", aleatorio2, listaItemsJugador2)
@@ -62,8 +63,11 @@ fun main() {
 
     // Creación de la partida con la lista de jugadores
 
+    val terminal = Terminal()
+    val gestionConsola = GestionConsola(terminal)
+    val partida = Partida(listaJugadores,armas,todosObjetos,gestionConsola)
 
-    val partida = Partida(listaJugadores,armas,todosObjetos)
+
     // Iniciar la partida
     partida.iniciarPartida()
 }

@@ -1,21 +1,19 @@
-/**
- * Data class que representa un jugador.
- * @property nombre El nombre del jugador.
- * @property vida La cantidad de vida del jugador.
- * @property objetos La lista mutable de objetos del jugador.
- */
-data class Jugador(
+
+interface Jugable
+
+
+class Jugador(
     val nombre: String,
     var vida: Int,
-    val objetos: MutableList<Objeto> = mutableListOf<Objeto>(),
-    val id:Int = contJug
+    val objetos: MutableList<Objeto> = mutableListOf<Objeto>()
+):Jugable{
 
-){
-    init {
-        contJug++
-    }
+}
 
-    companion object{
-        var contJug = 1
-    }
+
+class Ia(
+    var vida: Int,
+    val objetos: MutableList<Objeto> = mutableListOf<Objeto>()
+):Jugable {
+    val nombre = "Stiwi"
 }

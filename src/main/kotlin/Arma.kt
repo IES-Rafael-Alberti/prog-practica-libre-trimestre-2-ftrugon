@@ -56,12 +56,12 @@ abstract class Arma(val capacidaMaxima:Int, var danio:Int) {
     fun disparo(): Boolean {
         // Verificar si hay un cartucho cargado en el tambor
         return if (cargador.isNotEmpty() && cargador[0].cargado) {
-            println("BOOM")
+
             // Eliminar el cartucho disparado del cargador
             restarBala()
             true
         } else {
-            println("clic")
+
             // Eliminar el cartucho del cargador, aunque no haya disparo
             if (cargador.isNotEmpty()) {
                 restarBala()
