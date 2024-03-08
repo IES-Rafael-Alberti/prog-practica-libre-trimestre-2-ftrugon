@@ -40,7 +40,7 @@ fun main() {
 
 
     // Generación aleatoria de vida para cada jugador
-    val aleatorio2 = Random.nextInt(3, 6)
+    val aleatorio2 = Random.nextInt(899, 999)
     // Creación de los jugadores con sus respectivas listas de objetos aleatorios
     val jugador1 = Jugador("Fran", aleatorio2, listaItemsJugador1)
     val jugador2 = Jugador("Andres", aleatorio2, listaItemsJugador2)
@@ -50,6 +50,7 @@ fun main() {
         jugador1,
         jugador2
     )
+
 
     // Lista de armas
     val armas = listOf(
@@ -62,7 +63,7 @@ fun main() {
     // Creación de la partida con la lista de jugadores
 
 
-    val partida = Partida(listaJugadores,armas)
+    val partida = Partida(listaJugadores,armas,todosObjetos)
     // Iniciar la partida
     partida.iniciarPartida()
 }

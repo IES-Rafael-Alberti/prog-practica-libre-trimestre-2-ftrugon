@@ -7,14 +7,15 @@
 data class Jugador(
     val nombre: String,
     var vida: Int,
-    val objetos: MutableList<Objeto>,
-    val iD:Int = contJug
+    val objetos: MutableList<Objeto> = mutableListOf<Objeto>(),
+    val id:Int = contJug
 
 ){
     init {
         contJug++
     }
+
     companion object{
-        var contJug = 0
+        var contJug = 1
     }
 }

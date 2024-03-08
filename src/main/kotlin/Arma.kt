@@ -31,17 +31,21 @@ abstract class Arma(val capacidaMaxima:Int, var danio:Int) {
         val contarCargadas = listaDeCartuchos.count { it.cargado }
 
         // Verificar si no hay cartuchos cargados o todos están cargados
-        if (contarCargadas == 0) {
-            listaDeCartuchos[0] = Cartucho(true)
-        } else if (contarCargadas == numBalas) {
-            listaDeCartuchos[0] = Cartucho(false)
-        }
+        comprobarValidez(contarCargadas,listaDeCartuchos,numBalas)
 
         // Mezclar la lista de cartuchos
         listaDeCartuchos.shuffle()
 
 
         return listaDeCartuchos
+    }
+
+    fun comprobarValidez(contarCargadas:Int,listaDeCartuchos: MutableList<Cartucho>,numBalas: Int){
+        if (contarCargadas == 0) {
+            listaDeCartuchos[0] = Cartucho(true)
+        } else if (contarCargadas == numBalas) {
+            listaDeCartuchos[0] = Cartucho(false)
+        }
     }
 
 
@@ -54,16 +58,21 @@ abstract class Arma(val capacidaMaxima:Int, var danio:Int) {
         return if (cargador.isNotEmpty() && cargador[0].cargado) {
             println("BOOM")
             // Eliminar el cartucho disparado del cargador
-            cargador.remove(cargador[0])
+            restarBala()
             true
         } else {
             println("clic")
             // Eliminar el cartucho del cargador, aunque no haya disparo
             if (cargador.isNotEmpty()) {
-                cargador.remove(cargador[0])
+                restarBala()
             }
             false
         }
+    }
+
+
+    fun restarBala(){
+        cargador.remove(cargador[0])
     }
 
     open fun mostrarInfo():String{

@@ -1,15 +1,15 @@
+import kotlin.random.Random
+
 /**
  * Clase que representa una partida del juego.
  * @property jugadores La lista de jugadores que participan en la partida.
  */
-class Partida(private val jugadores: List<Jugador>,val listaArmas:List<Arma>) {
+class Partida(private val jugadores: List<Jugador>,val listaArmas:List<Arma>, val listaItems: List<Objeto>) {
     private var estadoPartida = false
     var arma = cambiarArma()
     var danio = 1
     private var cont = 1
     var saltarTurno = false
-
-
 
     /**
      * Método para iniciar la partida.
@@ -51,10 +51,31 @@ class Partida(private val jugadores: List<Jugador>,val listaArmas:List<Arma>) {
 
             if ( arma.cargador.count { it.cargado } == 0){
                 reasignarCargadores()
+                try {
+                    anadirItems()
+                }catch (e:Exception){
+                    println(e.message)
+                }
+
                 arma = cambiarArma()
             }
 
         } while (estadoPartida)
+    }
+
+
+    fun anadirItems(){
+        val cantidadRandom = Random.nextInt(1,4)
+
+        jugadores.forEach {jugador ->
+            if (jugador.objetos.size > 8){
+                throw NumberFormatException ("No puedes tener mas de 8 objetos")
+            }else{
+                repeat(cantidadRandom){
+                    jugador.objetos.add(listaItems.random())
+                }
+            }
+        }
     }
 
 
@@ -92,11 +113,15 @@ class Partida(private val jugadores: List<Jugador>,val listaArmas:List<Arma>) {
         println("----------------------------------------------------------------------------")
         println(arma.mostrarInfo())
         println("Hay ${arma.cargador.size} balas en el cargador")
-        println("${arma.cargador.count{ it.cargado}} estan cargadas")
+
+        val numbalas = arma.cargador.count{ it.cargado}
+
+        if (numbalas == 1){
+            println("$numbalas esta cargada")
+        }else println("$numbalas estan cargadas")
 
         // Imprimir información sobre la ronda y los jugadores
-        println("----------------------------------------------------------------------------")
-        println("Ronda $cont, ${jugador.nombre}")
+        println("-------------------------Ronda $cont, ${jugador.nombre}---------------------------")
         println("${jugadores[0].nombre}:${jugadores[0].vida}")
         println("${jugadores[1].nombre}:${jugadores[1].vida}")
     }
@@ -107,8 +132,6 @@ class Partida(private val jugadores: List<Jugador>,val listaArmas:List<Arma>) {
      */
     private fun usarObjeto(jugador: Jugador) {
         // Verificar si el jugador tiene objetos en su inventario
-        if (jugador.objetos.isNotEmpty()) {
-
 
             // Solicitar al jugador que elija un objeto para usar
 
@@ -116,19 +139,24 @@ class Partida(private val jugadores: List<Jugador>,val listaArmas:List<Arma>) {
 
             // Bucle para manejar la entrada del jugador hasta que elija un objeto válido o decida no usar ningún objeto
             while (!estado) {
-                printearInventario(jugador)
-                val respuesta = pedirrespuesta()
-                if (respuesta.toIntOrNull() != null) {
-                    // Verificar si la opción elegida está dentro del rango de opciones válidas
-                    val opcion = respuesta.toInt()
+                if (jugador.objetos.isNotEmpty()) {
+                    printearInventario(jugador)
+                    val respuesta = pedirrespuesta()
+                    if (respuesta.toIntOrNull() != null) {
+                        // Verificar si la opción elegida está dentro del rango de opciones válidas
+                        val opcion = respuesta.toInt()
 
-                    estado = elegirItem(opcion,jugador)
+                        estado = elegirItem(opcion,jugador)
 
+                    } else {
+                        println("Respuesta no válida")
+                    }
                 } else {
-                    println("Respuesta no válida")
+                    estado = true
+                    println("No tienes objetos para usar")
                 }
             }
-        } else println("No tienes objetos para usar")
+
     }
 
 
@@ -162,7 +190,7 @@ class Partida(private val jugadores: List<Jugador>,val listaArmas:List<Arma>) {
         jugador.objetos.forEachIndexed { index, objeto ->
             println("${index + 1}. $objeto")
         }
-        println("${jugador.objetos.size + 1}. No")
+        println("${jugador.objetos.size + 1}. No usar nada")
         print("Selecciona el número correspondiente al objeto que quieres usar (o introduce ${jugador.objetos.size + 1} para salir): ")
     }
 
@@ -235,7 +263,7 @@ class Partida(private val jugadores: List<Jugador>,val listaArmas:List<Arma>) {
     private fun elegirOpcion(): Int {
         do {
             print("¿Qué quieres hacer?: ")
-            val opcion = readlnOrNull()?.toInt() ?: 0
+            val opcion = readlnOrNull()?.toIntOrNull() ?: 0
 
             // Verificar si la opción elegida está dentro del rango válido
             if (opcion < 1 || opcion > 2) {
