@@ -15,11 +15,11 @@ interface Objeto {
  */
 class Cigarro : Objeto {
     override fun accion(partida: Partida, jugador: Jugador) {
-        jugador.vida++
+        jugador.anadirVida()
     }
 
     override fun toString(): String {
-        return "Cigarro -> El cigarro te cura 1 de vida"
+        return "Cigarro \uD83D\uDEAC -> El cigarro te cura 1 de vida"
     }
 }
 
@@ -34,7 +34,7 @@ class Lupa : Objeto {
     }
 
     override fun toString(): String {
-        return "Lupa -> Te permite ver el siguiente cartucho de cargador"
+        return "Lupa \uD83D\uDD0D -> Te permite ver el siguiente cartucho de cargador"
     }
 }
 
@@ -50,7 +50,7 @@ class Refresco : Objeto {
     }
 
     override fun toString(): String {
-        return "Refresco -> Descarga un cartucho"
+        return "Refresco \uD83C\uDF7A -> Descarga un cartucho"
     }
 }
 
@@ -63,7 +63,7 @@ class Sierra : Objeto {
     }
 
     override fun toString(): String {
-        return "Sierra -> Duplica el daño por 1 tiro"
+        return "Sierra \uD83D\uDD2A -> Duplica el daño por 1 tiro"
     }
 }
 
@@ -76,6 +76,6 @@ class Esposas : Objeto {
     }
 
     override fun toString(): String {
-        return "Esposas -> Te saltarás el turno del otro jugador"
+        return "Esposas ⛓ -> Te saltarás el turno del otro jugador"
     }
 }

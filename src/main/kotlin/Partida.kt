@@ -15,6 +15,7 @@ class Partida(val jugadores: List<Jugador>, val listaArmas:List<Arma>, val lista
     var saltarTurno = false
 
 
+
     /**
      * Método para iniciar la partida.
      */
@@ -54,7 +55,7 @@ class Partida(val jugadores: List<Jugador>, val listaArmas:List<Arma>, val lista
                 break
             }
 
-            // Si el cargador está vacío, se elige otra arma
+            // Si el cargador está vacío o solo tiene balas de fogueo, se elige otra arma
 
             if ( arma.cargador.count { it.cargado } == 0){
                 reasignarCargadores()
@@ -79,7 +80,7 @@ class Partida(val jugadores: List<Jugador>, val listaArmas:List<Arma>, val lista
                 if (jugador.objetos.size >= 8){
                     throw IllegalArgumentException(gestionConsola.tienesQueUsarItem(jugador))
                 }
-                jugador.objetos.add(listaItems.random())
+                jugador.anadirItemAleatorio(listaItems)
             }
         }
     }
@@ -130,12 +131,14 @@ class Partida(val jugadores: List<Jugador>, val listaArmas:List<Arma>, val lista
             while (!estado) {
                 if (jugador.objetos.isNotEmpty()) {
                     gestionConsola.mostrarInventario(jugador)
-                    val respuesta = readln().trim().uppercase()
+
+                    val respuesta = jugador.elegirItem()
+
                     if (respuesta.toIntOrNull() != null) {
                         // Verificar si la opción elegida está dentro del rango de opciones válidas
                         val opcion = respuesta.toInt()
 
-                        estado = elegirItem(opcion,jugador)
+                        estado = elegirObjeto(opcion,jugador)
 
                     } else {
                         gestionConsola.respuestaNoValida()
@@ -149,7 +152,7 @@ class Partida(val jugadores: List<Jugador>, val listaArmas:List<Arma>, val lista
     }
 
 
-    fun elegirItem(opcion: Int,jugador: Jugador):Boolean {
+    fun elegirObjeto(opcion: Int, jugador: Jugador):Boolean {
         when (opcion) {
             in 1..jugador.objetos.size -> {
                 // Obtener el objeto seleccionado por el jugador
@@ -190,7 +193,7 @@ class Partida(val jugadores: List<Jugador>, val listaArmas:List<Arma>, val lista
 
         if (estabaCargado) {
             // Reducir la vida del jugador según el daño especificado
-            jug.vida -= danio
+            jug.recibedanio(danio)
         }
     }
 
@@ -209,7 +212,7 @@ class Partida(val jugadores: List<Jugador>, val listaArmas:List<Arma>, val lista
             // Identificar al oponente del jugador actual
             val oponente = if (jug == jugadores[0]) jugadores[1] else jugadores[0]
             // Reducir la vida del oponente según el daño especificado
-            oponente.vida -= danio
+            oponente.recibedanio(danio)
         }
     }
 
@@ -226,6 +229,7 @@ class Partida(val jugadores: List<Jugador>, val listaArmas:List<Arma>, val lista
             jugadores[1]
         }
     }
+
 
     /**
      * Método para que el jugador elija una opción de acción durante su turno.

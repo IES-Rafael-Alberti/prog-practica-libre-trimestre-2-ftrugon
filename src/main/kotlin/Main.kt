@@ -70,5 +70,8 @@ fun main() {
 
     // Iniciar la partida
     partida.iniciarPartida()
+
+
+
 }
 

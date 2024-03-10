@@ -19,6 +19,7 @@ interface Consola{
     fun tienesQueUsarItem(jugador: Jugador):String
     fun noUsarNada()
     fun clicOBoom(boolean: Boolean)
+    fun puntosEntreDisparos()
 }
 
 
@@ -46,9 +47,9 @@ class GestionConsola(val terminal: Terminal):Consola {
         println("¿Quieres usar algún objeto? Este es tu inventario:")
         // Mostrar los objetos disponibles en el inventario del jugador
         jugador.objetos.forEachIndexed { index, objeto ->
-            println("${index + 1}. $objeto")
+            terminal.println((TextColors.blue)("${index + 1}. $objeto"))
         }
-        println("${jugador.objetos.size + 1}. No usar nada")
+        terminal.println((TextColors.blue)("${jugador.objetos.size + 1}. No usar nada"))
         print("Selecciona el número correspondiente al objeto que quieres usar (o introduce ${jugador.objetos.size + 1} para salir): ")
     }
 
@@ -59,7 +60,7 @@ class GestionConsola(val terminal: Terminal):Consola {
         print("¿Qué quieres hacer?: ")
     }
 
-    override fun usarObjeto(objeto: Objeto) = println("Has elegido usar: $objeto")
+    override fun usarObjeto(objeto: Objeto) = terminal.println((TextColors.green)("Has elegido usar: $objeto"))
 
     override fun opcionNoValida() = println("Opcion no valida")
 
@@ -68,6 +69,7 @@ class GestionConsola(val terminal: Terminal):Consola {
     override fun sinObjetosUsar() = println("No tienes objetos a usar")
 
     override fun anadirObjetos() {
+        terminal.println((TextColors.red)("-----------------------------------------------------------------"))
         println("*** EL ARMA SE HA CAMBIADO, YA NO QUEDAN BALAS CARGADAS ***")
         println("**** SE VAN A AÑADIR OBJETOS A LOS INVENTARIOS ****")
     }
@@ -82,7 +84,19 @@ class GestionConsola(val terminal: Terminal):Consola {
 
     override fun clicOBoom(boolean: Boolean){
         if (boolean){
-            println("BOO0O0O0OOM")
-        }else println("clic")
+            puntosEntreDisparos()
+            terminal.println((TextColors.red)("\nBOO0O0O0OOM"))
+        }else {
+            puntosEntreDisparos()
+            terminal.println((TextColors.green)("\nclic"))
+        }
     }
+
+     override fun puntosEntreDisparos(){
+        for (i in 1..3) {
+            print(". ")
+            Thread.sleep(750) // Pausa de medio segundo entre puntos
+        }
+    }
+
 }
