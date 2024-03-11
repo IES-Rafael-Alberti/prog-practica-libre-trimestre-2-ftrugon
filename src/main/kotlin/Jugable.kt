@@ -195,7 +195,7 @@ class Ia(
 
     fun calcularPuntuacion(objeto: Objeto,partida: Partida,chance:Int) = when(objeto){
             is Cigarro -> {
-                this.vidaMaximaOriginal + (partida.jugadores[0].objetos.count{ it is Sierra}) + partida.danio + chance
+                this.vidaMaximaOriginal * (partida.jugadores[0].objetos.count{ it is Sierra}) + partida.danio + chance
             }
             is Lupa ->{
                 chance
