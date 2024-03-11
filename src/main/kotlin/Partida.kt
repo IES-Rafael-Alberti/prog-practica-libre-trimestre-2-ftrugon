@@ -208,7 +208,7 @@ class PartidaIa(jugadores: MutableList<Jugador>, listaArmas: List<Arma>, listaob
     gestionConsola
 ) {
     init {
-        jugadores.addLast(Ia(this,jugadores[0].vida,gestionConsola))
+        jugadores.add(Ia(this,jugadores[0].vida,gestionConsola))
     }
 
     override fun iniciarPartida() {

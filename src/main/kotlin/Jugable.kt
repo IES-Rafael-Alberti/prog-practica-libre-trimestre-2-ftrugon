@@ -123,13 +123,22 @@ class Ia(
         }
 
 
+        cont = 0
+        for (objeto in objetos){
+            if (objeto is Esposas){
+                println(cont + 1)
+                return (cont + 1).toString()
+            }
+            cont++
+        }
+
         if (chance <= 35){
             println(objetos.size + 1)
             return (objetos.size + 1).toString()
         }
 
         cont = 0
-        if (chance in 26..49){
+        if (chance in 36..49){
             for (objeto in objetos){
                 if (objeto is Refresco){
                     println(cont + 1)
@@ -140,20 +149,18 @@ class Ia(
         }
 
         cont = 0
-        if (chance in 50..69){
+        if (chance in 49..69){
             for (objeto in objetos){
                 if (objeto is Lupa){
                     println(cont + 1)
-                    if (objeto.accion(partida,this)){
-                        chance = 100
-                    }else chance = 0
+                    chance = if (objeto.accion(partida,this)){
+                        100
+                    }else 0
                     return (cont + 1).toString()
                 }
                 cont++
             }
         }
-
-
 
 
         cont = 0
@@ -168,7 +175,6 @@ class Ia(
             println(objetos.size + 1)
             return (objetos.size + 1).toString()
         }
-
 
 
         println(objetos.size + 1)
@@ -194,13 +200,5 @@ class Ia(
         val totalBalas = arma.cargador.size
 
         return ((balasRestantes.toDouble() / totalBalas.toDouble()) * 100).toInt()
-    }
-
-    override fun usarObjeto(partida: Partida) {
-        super.usarObjeto(partida)
-    }
-
-    override fun elegirObjeto(partida: Partida, opcion: Int, jugador: Jugador): Boolean {
-        return super.elegirObjeto(partida, opcion, jugador)
     }
 }
