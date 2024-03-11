@@ -104,13 +104,25 @@ class Ia(
     val partida: Partida,
     vida: Int,
     gestionConsola: Consola,
+    val listaobjetos: List<Objeto>,
     objetos: MutableList<Objeto> = mutableListOf<Objeto>()
-):Jugador("Stiven", vida, gestionConsola, objetos){
+):Jugador("Dealer", vida, gestionConsola, objetos){
+
+    val vidaMaximaOriginal = vida
 
     var chance = calcularChance(partida.arma)
 
     override fun elegirobjeto(): String {
 
+
+        // Intentado IA minimax
+        val diccionarioPuntuaciones = mutableMapOf<Objeto,Int>()
+
+        listaobjetos.forEach { diccionarioPuntuaciones[it] = calcularPuntuacion(it,partida,chance) }
+
+
+
+        // Comportamiento sin IA
         if (chance != 100) chance = calcularChance(partida.arma)
 
         var cont = 0
@@ -181,16 +193,35 @@ class Ia(
         return (objetos.size + 1).toString()
     }
 
+    fun calcularPuntuacion(objeto: Objeto,partida: Partida,chance:Int) = when(objeto){
+            is Cigarro -> {
+                this.vidaMaximaOriginal + (partida.jugadores[0].objetos.count{ it is Sierra}) + partida.danio + chance
+            }
+            is Lupa ->{
+                chance
+            }
+            is Refresco ->{
+                chance / 2
+            }
+            is Sierra ->{
+                this.vida * partida.danio + chance
+            }
+            is Esposas -> {
+                this.vida * partida.danio + chance
+            }
+        else -> {0}
+    }
+
     override fun elegirOpcionDisparo(): Int {
 
         chance = calcularChance(partida.arma)
 
-        if (chance >= 50 ){
+        return if (chance >= 50 ){
             println(2)
-            return 2
+            2
         }else {
             println(1)
-            return 1
+            1
         }
     }
 
@@ -201,4 +232,6 @@ class Ia(
 
         return ((balasRestantes.toDouble() / totalBalas.toDouble()) * 100).toInt()
     }
+
+
 }

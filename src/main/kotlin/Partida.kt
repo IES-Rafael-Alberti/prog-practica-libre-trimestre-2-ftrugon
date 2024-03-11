@@ -208,39 +208,7 @@ class PartidaIa(jugadores: MutableList<Jugador>, listaArmas: List<Arma>, listaob
     gestionConsola
 ) {
     init {
-        jugadores.add(Ia(this,jugadores[0].vida,gestionConsola))
-    }
-
-    override fun iniciarPartida() {
-        super.iniciarPartida()
-    }
-
-    override fun anadirobjetos() {
-        super.anadirobjetos()
-    }
-
-    override fun reasignarCargadores() {
-        super.reasignarCargadores()
-    }
-
-    override fun gestiorarDisparo(opcion: Int, jugador: Jugador) {
-        super.gestiorarDisparo(opcion, jugador)
-    }
-
-    override fun dispararme(jug: Jugador, danio: Int) {
-        super.dispararme(jug, danio)
-    }
-
-    override fun dispararle(jug: Jugador, danio: Int) {
-        super.dispararle(jug, danio)
-    }
-
-    override fun elegirJugador(numRonda: Int): Jugador {
-        return super.elegirJugador(numRonda)
-    }
-
-    override fun alguienMuere(): Boolean {
-        return super.alguienMuere()
+        jugadores.add(Ia(this,jugadores[0].vida,gestionConsola,listaobjetos))
     }
 
 }

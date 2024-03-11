@@ -28,12 +28,12 @@ class Cigarro : Objeto {
  */
 class Lupa : Objeto {
     override fun accion(partida: Partida, jugador: Jugador):Boolean {
-        if (partida.arma.cargador.isNotEmpty() && partida.arma.cargador[0].cargado) {
+        return if (partida.arma.cargador.isNotEmpty() && partida.arma.cargador[0].cargado) {
             println("Este cartucho está cargado")
-            return true
+            true
         } else {
             println("Este cartucho está descargado")
-            return false
+            false
         }
     }
 
