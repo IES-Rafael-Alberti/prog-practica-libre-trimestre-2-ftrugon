@@ -7,7 +7,7 @@ interface Objeto {
      * @param partida La partida en curso.
      * @param jugador El jugador que realiza la acción.
      */
-    fun accion(partida: Partida, jugador: Jugador)
+    fun accion(partida: Partida, jugador: Jugador):Any
 }
 
 /**
@@ -27,10 +27,14 @@ class Cigarro : Objeto {
  * Clase que representa un objeto "Lupa" en el juego.
  */
 class Lupa : Objeto {
-    override fun accion(partida: Partida, jugador: Jugador) {
+    override fun accion(partida: Partida, jugador: Jugador):Boolean {
         if (partida.arma.cargador.isNotEmpty() && partida.arma.cargador[0].cargado) {
             println("Este cartucho está cargado")
-        } else println("Este cartucho está descargado")
+            return true
+        } else {
+            println("Este cartucho está descargado")
+            return false
+        }
     }
 
     override fun toString(): String {

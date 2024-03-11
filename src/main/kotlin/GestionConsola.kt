@@ -16,7 +16,7 @@ interface Consola{
     fun sinObjetosUsar()
     fun anadirObjetos()
     fun saltarTurno(jugador: Jugador)
-    fun tienesQueUsarItem(jugador: Jugador):String
+    fun tienesQueUsarobjeto(jugador: Jugador):String
     fun noUsarNada()
     fun clicOBoom(boolean: Boolean)
     fun puntosEntreDisparos()
@@ -76,8 +76,8 @@ class GestionConsola(val terminal: Terminal):Consola {
 
     override fun saltarTurno(jugador: Jugador) = println("Se ha saltado el turno de ${jugador.nombre}")
 
-    override fun tienesQueUsarItem(jugador: Jugador): String {
-        return "Usa algun item ${jugador.nombre}, no puedes tener mas de 8"
+    override fun tienesQueUsarobjeto(jugador: Jugador): String {
+        return "Usa algun objeto ${jugador.nombre}, no puedes tener mas de 8"
     }
 
     override fun noUsarNada() = println("No has usado nada")
