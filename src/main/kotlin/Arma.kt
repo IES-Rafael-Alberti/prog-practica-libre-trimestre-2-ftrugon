@@ -75,34 +75,47 @@ abstract class Arma(val capacidaMaxima:Int, var danio:Int) {
         cargador.remove(cargador[0])
     }
 
-    open fun mostrarInfo():String{
-        return "capacidad maxima de $capacidaMaxima balas y un daño de $danio"
-    }
 
 }
 
 
 class Escopeta(capacidaMaxima: Int, danio: Int) : Arma(capacidaMaxima, danio){
 
-    override fun mostrarInfo(): String {
-        return "Escopeta con " + super.mostrarInfo()
-    }
-
     override fun toString(): String {
-        return "Escopeta"
+
+        val mensaje =
+        """
+         ,______________________________________       
+        |_________________,----------._ [____]  ""-,__  __....-----=====
+                       (_(||||||||||||)___________/   ""                |
+                          `----------' #$$$$$$[ ))"-,                   |
+                                               ""    `,  _,--....___    |
+        """
+        return mensaje
     }
 
 }
 
 class EscopetaDobleCanon(capacidaMaxima: Int, danio: Int) : Arma(capacidaMaxima, danio){
-    override fun mostrarInfo(): String {
-        return "Escopeta de doble cañon con " + super.mostrarInfo()
-    }
 
     override fun toString(): String {
-        return "Escopeta de doble cañon"
+
+
+        val mensaje=
+        """
+             ,________________________________       
+            |__________,----------._ [____]  ""-,__  __...-----==="
+                    (_(||||||||||||)___________/   ""             |
+                       `----------'        [ ))"-,                |
+                                            ""    `,  _,--...___  |
+        """
+
+        return mensaje
     }
 }
+
+
+
 
 class Revolver(capacidaMaxima: Int, danio: Int) : Arma(capacidaMaxima, danio){
 
@@ -110,12 +123,21 @@ class Revolver(capacidaMaxima: Int, danio: Int) : Arma(capacidaMaxima, danio){
         return capacidaMaxima
     }
 
-    override fun mostrarInfo(): String {
-        return "Revolver con " + super.mostrarInfo()
-    }
 
     override fun toString(): String {
-        return "Revolver"
+
+        val mensaje =
+        """
+                                              />
+              __+_____________________/\/\___/ /|
+             ()______________________      / /|/\
+                         /0 0  ---- |----    /---\
+                        |0 o 0 ----|| - \ --|      \
+                         \0_0/____/ |    |  |\      \
+                                     \__/__/  |      \
+                                              |_______|
+        """
+        return mensaje
     }
 
 

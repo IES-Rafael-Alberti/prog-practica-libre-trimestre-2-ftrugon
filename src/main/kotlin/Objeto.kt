@@ -7,15 +7,16 @@ interface Objeto {
      * @param partida La partida en curso.
      * @param jugador El jugador que realiza la acción.
      */
-    fun accion(partida: Partida, jugador: Jugador):Any
+    fun accion(partida: Partida, jugador: Jugador):String
 }
 
 /**
  * Clase que representa un objeto "Cigarro" en el juego.
  */
 class Cigarro : Objeto {
-    override fun accion(partida: Partida, jugador: Jugador) {
+    override fun accion(partida: Partida, jugador: Jugador):String {
         jugador.anadirVida()
+        return "Te has curado 1 de vida"
     }
 
     override fun toString(): String {
@@ -27,13 +28,11 @@ class Cigarro : Objeto {
  * Clase que representa un objeto "Lupa" en el juego.
  */
 class Lupa : Objeto {
-    override fun accion(partida: Partida, jugador: Jugador):Boolean {
+    override fun accion(partida: Partida, jugador: Jugador):String {
         return if (partida.arma.cargador.isNotEmpty() && partida.arma.cargador[0].cargado) {
-            println("Este cartucho está cargado")
-            true
+            "Este cartucho está cargado"
         } else {
-            println("Este cartucho está descargado")
-            false
+            "Este cartucho está descargado"
         }
     }
 
@@ -46,11 +45,13 @@ class Lupa : Objeto {
  * Clase que representa un objeto "Refresco" en el juego.
  */
 class Refresco : Objeto {
-    override fun accion(partida: Partida, jugador: Jugador) {
-        if (partida.arma.cargador.isNotEmpty() && partida.arma.cargador[0].cargado) {
-            println("Este cartucho estaba cargado")
-        } else println("Este cartucho estaba descargado")
+    override fun accion(partida: Partida, jugador: Jugador): String {
+        val copiaCargador = partida.arma.cargador
         partida.arma.cargador.removeAt(0)
+        return if (copiaCargador.isNotEmpty() && copiaCargador[0].cargado) {
+            "Este cartucho estaba cargado"
+        } else "Este cartucho estaba descargado"
+
     }
 
     override fun toString(): String {
@@ -62,8 +63,9 @@ class Refresco : Objeto {
  * Clase que representa un objeto "Sierra" en el juego.
  */
 class Sierra : Objeto {
-    override fun accion(partida: Partida, jugador: Jugador) {
+    override fun accion(partida: Partida, jugador: Jugador): String {
         partida.danio *= 2
+        return "El daño se ha multiplicado por 2"
     }
 
     override fun toString(): String {
@@ -75,8 +77,9 @@ class Sierra : Objeto {
  * Clase que representa un objeto "Esposas" en el juego.
  */
 class Esposas : Objeto {
-    override fun accion(partida: Partida, jugador: Jugador) {
+    override fun accion(partida: Partida, jugador: Jugador): String {
         partida.saltarTurno = true
+        return "Te saltaras el turno del rival"
     }
 
     override fun toString(): String {

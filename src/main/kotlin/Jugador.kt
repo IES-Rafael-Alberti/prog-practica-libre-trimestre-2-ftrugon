@@ -57,11 +57,12 @@ open class Jugador(
                 // Obtener el objeto seleccionado por el jugador
                 val objetoElegido = jugador.objetos[opcion - 1]
 
-                gestionConsola.usarObjeto(objetoElegido)
 
                 // Ejecutar la acción asociada al objeto en la partida
-                objetoElegido.accion(partida, jugador)
-                // Eliminar el objeto usado del inventario del jugador
+                val mensaje = objetoElegido.accion(partida, jugador)
+
+                gestionConsola.printearMensajeObjeto(mensaje)
+
                 jugador.objetos.remove(objetoElegido)
 
                 return false
@@ -80,7 +81,6 @@ open class Jugador(
     open fun elegirobjeto():String{
         return readln().trim().uppercase()
     }
-
 
     open fun elegirOpcionDisparo(): Int{
         do {
@@ -106,73 +106,26 @@ class Ia(
 ):Jugador("Dealer", vida, gestionConsola, objetos){
 
     var chance = calcularChance(partida.arma)
+    var objetosUsados = mutableListOf<Objeto>()
+
 
     override fun elegirobjeto(): String {
 
-        chance = calcularChance(partida.arma)
-
         if (chance != 100) chance = calcularChance(partida.arma)
 
+
         var cont = 0
-        for (objeto in objetos){
-            if (objeto is Cigarro){
-                println(cont + 1)
-                return (cont + 1).toString()
-            }
-            cont++
-        }
-
-        cont = 0
-        for (objeto in objetos){
-            if (objeto is Esposas){
-                println(cont + 1)
-                return (cont + 1).toString()
-            }
-            cont++
-        }
-
-        if (chance <= 35){
-            println(objetos.size + 1)
-            return (objetos.size + 1).toString()
-        }
-
-        cont = 0
-        if (chance in 36..49){
-            for (objeto in objetos){
-                if (objeto is Refresco){
-                    println(cont + 1)
-                    return (cont + 1).toString()
-                }
-                cont++
-            }
-        }
-
-        cont = 0
         if (chance in 49..69){
             for (objeto in objetos){
                 if (objeto is Lupa){
                     println(cont + 1)
-                    chance = if (objeto.accion(partida,this)){
+                    chance = if (objeto.accion(partida,this) == "Este cartucho está cargado"){
                         100
                     }else 0
                     return (cont + 1).toString()
                 }
                 cont++
             }
-        }
-
-
-        cont = 0
-        if (chance >= 70 || chance == 50 ){
-            for (objeto in objetos){
-                if (objeto is Sierra){
-                    println(cont + 1)
-                    return (cont + 1).toString()
-                }
-                cont++
-            }
-            println(objetos.size + 1)
-            return (objetos.size + 1).toString()
         }
 
 

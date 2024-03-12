@@ -8,7 +8,7 @@ import kotlin.random.Random
  * @property jugadores La lista de jugadores que participan en la partida.
  */
 open class Partida(
-    val jugadores: List<Jugador>,
+    val jugadores: MutableList<Jugador>,
     val listaArmas: List<Arma>,
     val listaobjetos: List<Objeto>,
     val gestionConsola: Consola
@@ -20,6 +20,11 @@ open class Partida(
     private var ronda = 1
     var saltarTurno = false
 
+    init {
+        if (jugadores.size == 1){
+            jugadores.add(Ia(this,jugadores[0].vida,gestionConsola))
+        }
+    }
 
 
     /**
@@ -198,14 +203,4 @@ open class Partida(
         }
         return false
     }
-}
-
-class PartidaIa(jugadores: MutableList<Jugador>, listaArmas: List<Arma>, listaobjetos: List<Objeto>, gestionConsola: Consola): Partida(jugadores, listaArmas,
-    listaobjetos,
-    gestionConsola
-) {
-    init {
-        jugadores.add(Ia(this,jugadores[0].vida,gestionConsola,listaobjetos))
-    }
-
 }

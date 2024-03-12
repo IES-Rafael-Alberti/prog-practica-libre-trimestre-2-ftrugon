@@ -2,20 +2,6 @@ import com.github.ajalt.mordant.terminal.Terminal
 import kotlin.random.Random
 
 /**
- * Crea una lista aleatoria de objetos a partir de una lista dada de objetos.
- * @param numobjetos El número de elementos que se desean en la lista aleatoria.
- * @param todosobjetos La lista de objetos disponibles para seleccionar aleatoriamente.
- * @return Una lista mutable de objetos aleatorios.
- */
-fun crearlistaaleatoria(numobjetos:Int,todosobjetos:List<Objeto>): MutableList<Objeto> {
-    val listaadevolver = mutableListOf<Objeto>()
-    for (i in 1..numobjetos){
-        listaadevolver.add(todosobjetos.random())
-    }
-    return listaadevolver
-}
-
-/**
  * Funcion principal del programa , donde se crea la partida los jugadores y sus objetos
  */
 fun main() {
@@ -42,17 +28,16 @@ fun main() {
 
 
     val jugador1 = Jugador("Fran", vida,gestionConsola)
-
-    //val jugador2 = Jugador("Stivem", aleatorio2)
+    val jugador2 = Jugador("Stivem", vida,gestionConsola)
 
 
     val listaJugadores = mutableListOf(
         jugador1,
-        // jugador2
+         //jugador2
     )
 
 
-    val partida = PartidaIa(listaJugadores,armas,todosObjetos,gestionConsola)
+    val partida = Partida(listaJugadores,armas,todosObjetos,gestionConsola)
 
 
     partida.iniciarPartida()

@@ -10,7 +10,6 @@ interface Consola{
     fun mostrarCosas(arma:Arma,jugadores: List<Jugador>, jugador: Jugador,ronda:Int)
     fun mostrarInventario(jugador: Jugador)
     fun opcionesDisparo()
-    fun usarObjeto(objeto: Objeto)
     fun opcionNoValida()
     fun respuestaNoValida()
     fun sinObjetosUsar()
@@ -20,6 +19,8 @@ interface Consola{
     fun noUsarNada()
     fun clicOBoom(boolean: Boolean)
     fun puntosEntreDisparos()
+    fun printearMensajeObjeto(mensaje:String)
+
 }
 
 
@@ -28,7 +29,7 @@ class GestionConsola(val terminal: Terminal):Consola {
     override fun mostrarCosas(arma:Arma, jugadores: List<Jugador>, jugador: Jugador, ronda:Int){
         // Imprimir el arma a usar y sus balas
         terminal.println((TextColors.red)("-----------------------------------------------------------------"))
-        println(arma.mostrarInfo())
+        println(arma)
         println("Hay ${arma.cargador.size} balas en el cargador")
 
         val numbalas = arma.cargador.count{ it.cargado}
@@ -60,8 +61,6 @@ class GestionConsola(val terminal: Terminal):Consola {
         print("¿Qué quieres hacer?: ")
     }
 
-    override fun usarObjeto(objeto: Objeto) = terminal.println((TextColors.green)("Has elegido usar: $objeto"))
-
     override fun opcionNoValida() = println("Opcion no valida")
 
     override fun respuestaNoValida() = println("Respuesta no valida")
@@ -92,11 +91,13 @@ class GestionConsola(val terminal: Terminal):Consola {
         }
     }
 
-     override fun puntosEntreDisparos(){
+    override fun puntosEntreDisparos(){
         for (i in 1..3) {
             print(". ")
             Thread.sleep(750) // Pausa de medio segundo entre puntos
         }
     }
+
+    override fun printearMensajeObjeto(mensaje:String) = terminal.println((TextColors.green)(mensaje))
 
 }
