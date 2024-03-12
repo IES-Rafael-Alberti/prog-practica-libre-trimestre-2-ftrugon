@@ -1,5 +1,3 @@
-import java.sql.Ref
-
 open class Jugador(
     val nombre: String,
     var vida: Int,
@@ -104,25 +102,15 @@ class Ia(
     val partida: Partida,
     vida: Int,
     gestionConsola: Consola,
-    val listaobjetos: List<Objeto>,
     objetos: MutableList<Objeto> = mutableListOf<Objeto>()
 ):Jugador("Dealer", vida, gestionConsola, objetos){
-
-    val vidaMaximaOriginal = vida
 
     var chance = calcularChance(partida.arma)
 
     override fun elegirobjeto(): String {
 
+        chance = calcularChance(partida.arma)
 
-        // Intentado IA minimax
-        val diccionarioPuntuaciones = mutableMapOf<Objeto,Int>()
-
-        listaobjetos.forEach { diccionarioPuntuaciones[it] = calcularPuntuacion(it,partida,chance) }
-
-
-
-        // Comportamiento sin IA
         if (chance != 100) chance = calcularChance(partida.arma)
 
         var cont = 0
@@ -133,7 +121,6 @@ class Ia(
             }
             cont++
         }
-
 
         cont = 0
         for (objeto in objetos){
@@ -193,24 +180,6 @@ class Ia(
         return (objetos.size + 1).toString()
     }
 
-    fun calcularPuntuacion(objeto: Objeto,partida: Partida,chance:Int) = when(objeto){
-            is Cigarro -> {
-                this.vidaMaximaOriginal * (partida.jugadores[0].objetos.count{ it is Sierra}) + partida.danio + chance
-            }
-            is Lupa ->{
-                chance
-            }
-            is Refresco ->{
-                chance / 2
-            }
-            is Sierra ->{
-                this.vida * partida.danio + chance
-            }
-            is Esposas -> {
-                this.vida * partida.danio + chance
-            }
-        else -> {0}
-    }
 
     override fun elegirOpcionDisparo(): Int {
 
@@ -226,12 +195,9 @@ class Ia(
     }
 
     fun calcularChance(arma: Arma): Int {
-
-        val balasRestantes = arma.cargador.count { it.cargado }
-        val totalBalas = arma.cargador.size
-
-        return ((balasRestantes.toDouble() / totalBalas.toDouble()) * 100).toInt()
+        return ((arma.cargador.count { it.cargado }.toDouble() / arma.cargador.size.toDouble()) * 100).toInt()
     }
 
 
 }
+

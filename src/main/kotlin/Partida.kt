@@ -117,7 +117,11 @@ open class Partida(
                 ronda++
                 val jugador2 = elegirJugador(ronda)
 
-                gestionConsola.saltarTurno(jugador2)
+
+
+                if (!alguienMuere()) {
+                    gestionConsola.saltarTurno(jugador2)
+                }
 
                 // Vuelve saltarturno al estodo original para que no se vuelva a saltar el turno del oponente
                 saltarTurno = false
@@ -125,13 +129,6 @@ open class Partida(
             ronda++
         }
     }
-
-    /**
-     * Método para permitir al jugador usar objetos durante su turno.
-     * @param jugador El jugador que desea usar objetos.
-     */
-    
-
 
 
 
