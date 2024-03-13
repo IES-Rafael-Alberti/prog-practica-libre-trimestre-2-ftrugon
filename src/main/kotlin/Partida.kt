@@ -17,13 +17,13 @@ open class Partida(
     private var estadoPartida = false
     var arma = cambiarArma()
     var danio = 1
-    private var ronda = 1
+    var ronda = 1
     var saltarTurno = false
 
     init {
-        if (jugadores.size == 0){
+        if (jugadores.size == 1){
             jugadores.add(Ia(this,"dealer",999,gestionConsola))
-            jugadores.add(Ia(this,"paco",999,gestionConsola))
+          //  jugadores.add(Ia(this,"paco",999,gestionConsola))
         }
     }
 

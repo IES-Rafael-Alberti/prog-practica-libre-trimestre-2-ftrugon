@@ -32,7 +32,7 @@ fun main() {
 
 
     val listaJugadores = mutableListOf<Jugador>(
-        //jugador1,
+        jugador1,
          //jugador2
     )
 

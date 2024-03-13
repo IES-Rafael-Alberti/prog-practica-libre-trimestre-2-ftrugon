@@ -114,12 +114,24 @@ class Ia(
 ):Jugador(nombre, vida, gestionConsola, objetos){
 
     var chance = calcularChance(partida.arma)
+    var rondaAnterior = partida.ronda
+    var seaUsadoRefresco = false
     var seaUsadoEsposa = false
     var seaUsadoLupa = false
 
     override fun elegirobjeto(): String {
 
-        if (!(chance == 100 || chance == 0 && seaUsadoLupa)) chance = calcularChance(partida.arma)
+
+        if (seaUsadoRefresco) {
+            chance = calcularChance(partida.arma)
+            seaUsadoRefresco = false
+        }
+        if (rondaAnterior != partida.ronda) {
+            chance = calcularChance(partida.arma)
+            rondaAnterior = partida.ronda
+        }
+
+        //if (!(chance == 100 || chance == 0 && seaUsadoLupa)) chance = calcularChance(partida.arma)
 
         var cont = 0
         for (objeto in objetos){
@@ -134,13 +146,10 @@ class Ia(
         cont = 0
         for (objeto in objetos){
             if (objeto is Esposas && !seaUsadoEsposa){
-                seaUsadoLupa = true
+                seaUsadoEsposa = true
                 println(cont + 1)
-                chance = if (objeto.accion(partida,this) == "Este cartucho está cargado"){
-                    100
-                }else 0
                 return (cont + 1).toString()
-            }else if (objeto is Lupa){
+            }else if (objeto is Esposas){
                 seaUsadoEsposa = false
             }
             cont++
@@ -179,6 +188,7 @@ class Ia(
                 cont = 0
                 for (objeto in objetos){
                     if (objeto is Refresco){
+                        seaUsadoRefresco = true
                         gestionConsola.printearNum(cont + 1)
                         return (cont + 1).toString()
                     }
