@@ -46,9 +46,9 @@ class Lupa : Objeto {
  */
 class Refresco : Objeto {
     override fun accion(partida: Partida, jugador: Jugador): String {
-        val copiaCargador = partida.arma.cargador
-        partida.arma.cargador.removeAt(0)
-        return if (copiaCargador.isNotEmpty() && copiaCargador[0].cargado) {
+        val copiaPrimeraBala = partida.arma.cargador[0]
+        partida.arma.cargador.remove(partida.arma.cargador[0])
+        return if (copiaPrimeraBala.cargado) {
             "Este cartucho estaba cargado"
         } else "Este cartucho estaba descargado"
 

@@ -59,9 +59,16 @@ open class Jugador(
 
 
                 // Ejecutar la acción asociada al objeto en la partida
-                val mensaje = objetoElegido.accion(partida, jugador)
+                try {
+                    val mensaje = objetoElegido.accion(partida, jugador)
+                    gestionConsola.printearMensajeObjeto(mensaje)
 
-                gestionConsola.printearMensajeObjeto(mensaje)
+                }catch (e:Exception) {
+
+                    //Solo el refresco puede dar un error, asi que el error lo muestro
+                    gestionConsola.mostrarErrorRefresco()
+                }
+
 
                 jugador.objetos.remove(objetoElegido)
 
@@ -106,37 +113,91 @@ class Ia(
 ):Jugador("Dealer", vida, gestionConsola, objetos){
 
     var chance = calcularChance(partida.arma)
-    var objetosUsados = mutableListOf<Objeto>()
-
+    var seaUsadoEsposa = false
+    var seaUsadoLupa = false
 
     override fun elegirobjeto(): String {
 
-        if (chance != 100) chance = calcularChance(partida.arma)
+        if (!(chance == 100 || chance == 0 && seaUsadoLupa)) chance = calcularChance(partida.arma)
 
+
+        chance = calcularChance(partida.arma)
 
         var cont = 0
-        if (chance in 49..69){
-            for (objeto in objetos){
-                if (objeto is Lupa){
-                    println(cont + 1)
-                    chance = if (objeto.accion(partida,this) == "Este cartucho está cargado"){
-                        100
-                    }else 0
-                    return (cont + 1).toString()
-                }
-                cont++
+        for (objeto in objetos){
+            if (objeto is Cigarro){
+                gestionConsola.printearNum(cont + 1)
+                return (cont + 1).toString()
             }
+            cont++
         }
 
 
+        cont = 0
+        for (objeto in objetos){
+            if (objeto is Esposas && !seaUsadoEsposa){
+                seaUsadoLupa = true
+                println(cont + 1)
+                chance = if (objeto.accion(partida,this) == "Este cartucho está cargado"){
+                    100
+                }else 0
+                return (cont + 1).toString()
+            }else if (objeto is Lupa){
+                seaUsadoEsposa = false
+            }
+            cont++
+        }
+
+        when (chance){
+            in 65..100 -> {
+                cont = 0
+                for (objeto in objetos){
+                    if (objeto is Sierra){
+                        gestionConsola.printearNum(cont + 1)
+                        return (cont + 1).toString()
+                    }
+                    cont++
+                }
+                gestionConsola.printearNum(cont + 1)
+                return (objetos.size + 1).toString()
+            }
+            in 40..79->{
+                cont = 0
+                for (objeto in objetos){
+                    if (objeto is Lupa && !seaUsadoLupa){
+                        seaUsadoLupa = true
+                        println(cont + 1)
+                        chance = if (objeto.accion(partida,this) == "Este cartucho está cargado"){
+                            100
+                        }else 0
+                        return (cont + 1).toString()
+                    }else if (objeto is Lupa){
+                        seaUsadoLupa = false
+                    }
+                    cont++
+                }
+            }
+            in 0..70 -> {
+                cont = 0
+                for (objeto in objetos){
+                    if (objeto is Refresco){
+                        gestionConsola.printearNum(cont + 1)
+                        return (cont + 1).toString()
+                    }
+                    cont++
+                }
+            }
+        }
+
         println(objetos.size + 1)
         return (objetos.size + 1).toString()
+
     }
 
 
     override fun elegirOpcionDisparo(): Int {
 
-        chance = calcularChance(partida.arma)
+        if (chance != 100 && chance != 0) chance = calcularChance(partida.arma)
 
         return if (chance >= 50 ){
             println(2)

@@ -20,7 +20,8 @@ interface Consola{
     fun clicOBoom(boolean: Boolean)
     fun puntosEntreDisparos()
     fun printearMensajeObjeto(mensaje:String)
-
+    fun printearNum(num:Int)
+    fun mostrarErrorRefresco()
 }
 
 
@@ -100,4 +101,7 @@ class GestionConsola(val terminal: Terminal):Consola {
 
     override fun printearMensajeObjeto(mensaje:String) = terminal.println((TextColors.green)(mensaje))
 
+    override fun printearNum(num:Int) = println(num)
+
+    override fun mostrarErrorRefresco() = println("No puedes usar el refresco si no hay balas")
 }

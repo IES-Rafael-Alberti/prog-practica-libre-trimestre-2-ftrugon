@@ -196,9 +196,9 @@ open class Partida(
      * @return true si algún jugador ha muerto, false en caso contrario.
      */
     open fun alguienMuere(): Boolean {
-        // Iterar a través de todos los jugadores
+        // Verificar algun jugador tiene 0 de vida
         for (jugador in jugadores) {
-            // Verificar si el jugador actual tiene 0 de vida
+
             if (jugador.vida <= 0) return true
         }
         return false

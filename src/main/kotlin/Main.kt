@@ -24,7 +24,7 @@ fun main() {
         Revolver(6,1)
     )
 
-    val vida = Random.nextInt(3, 6)
+    val vida = Random.nextInt(3, 999)
 
 
     val jugador1 = Jugador("Fran", vida,gestionConsola)
