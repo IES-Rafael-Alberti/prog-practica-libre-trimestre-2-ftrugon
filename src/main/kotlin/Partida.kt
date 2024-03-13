@@ -21,8 +21,9 @@ open class Partida(
     var saltarTurno = false
 
     init {
-        if (jugadores.size == 1){
-            jugadores.add(Ia(this,jugadores[0].vida,gestionConsola))
+        if (jugadores.size == 0){
+            jugadores.add(Ia(this,"dealer",999,gestionConsola))
+            jugadores.add(Ia(this,"paco",999,gestionConsola))
         }
     }
 

@@ -107,10 +107,11 @@ open class Jugador(
 
 class Ia(
     val partida: Partida,
+    nombre: String,
     vida: Int,
     gestionConsola: Consola,
     objetos: MutableList<Objeto> = mutableListOf<Objeto>()
-):Jugador("Dealer", vida, gestionConsola, objetos){
+):Jugador(nombre, vida, gestionConsola, objetos){
 
     var chance = calcularChance(partida.arma)
     var seaUsadoEsposa = false
@@ -119,9 +120,6 @@ class Ia(
     override fun elegirobjeto(): String {
 
         if (!(chance == 100 || chance == 0 && seaUsadoLupa)) chance = calcularChance(partida.arma)
-
-
-        chance = calcularChance(partida.arma)
 
         var cont = 0
         for (objeto in objetos){

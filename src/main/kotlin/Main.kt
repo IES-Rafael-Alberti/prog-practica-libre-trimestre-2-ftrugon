@@ -31,8 +31,8 @@ fun main() {
     val jugador2 = Jugador("Stivem", vida,gestionConsola)
 
 
-    val listaJugadores = mutableListOf(
-        jugador1,
+    val listaJugadores = mutableListOf<Jugador>(
+        //jugador1,
          //jugador2
     )
 
