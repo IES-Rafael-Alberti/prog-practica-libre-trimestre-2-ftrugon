@@ -1,9 +1,8 @@
 import kotlin.random.Random
 
-abstract class Arma(val capacidaMaxima:Int, var danio:Int) {
+abstract class Arma(val capacidaMaxima:Int, var danio:Int,val tipo:String) {
 
     var cargador = recargar()
-
 
     fun recargar():MutableList<Cartucho>{
         return cargarTambor(elegirNumBalas())
@@ -79,7 +78,7 @@ abstract class Arma(val capacidaMaxima:Int, var danio:Int) {
 }
 
 
-class Escopeta(capacidaMaxima: Int, danio: Int) : Arma(capacidaMaxima, danio){
+class Escopeta(capacidaMaxima: Int, danio: Int, tipo: String) : Arma(capacidaMaxima, danio, tipo){
 
     override fun toString(): String {
 
@@ -96,7 +95,7 @@ class Escopeta(capacidaMaxima: Int, danio: Int) : Arma(capacidaMaxima, danio){
 
 }
 
-class EscopetaDobleCanon(capacidaMaxima: Int, danio: Int) : Arma(capacidaMaxima, danio){
+class EscopetaDobleCanon(capacidaMaxima: Int, danio: Int, tipo: String) : Arma(capacidaMaxima, danio, tipo){
 
     override fun toString(): String {
 
@@ -117,7 +116,7 @@ class EscopetaDobleCanon(capacidaMaxima: Int, danio: Int) : Arma(capacidaMaxima,
 
 
 
-class Revolver(capacidaMaxima: Int, danio: Int) : Arma(capacidaMaxima, danio){
+class Revolver(capacidaMaxima: Int, danio: Int, tipo: String) : Arma(capacidaMaxima, danio, tipo){
 
     override fun elegirNumBalas(): Int {
         return capacidaMaxima

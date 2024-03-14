@@ -31,6 +31,7 @@ class GestionConsola(val terminal: Terminal):Consola {
         // Imprimir el arma a usar y sus balas
         terminal.println((TextColors.red)("-----------------------------------------------------------------"))
         println(arma)
+        println(arma.tipo)
         println("Hay ${arma.cargador.size} balas en el cargador")
 
         val numbalas = arma.cargador.count{ it.cargado}

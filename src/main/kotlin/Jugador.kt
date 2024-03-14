@@ -5,8 +5,6 @@ open class Jugador(
     val objetos: MutableList<Objeto> = mutableListOf<Objeto>()
 ){
 
-
-
     fun recibedanio(danio:Int){
         vida -= danio
     }

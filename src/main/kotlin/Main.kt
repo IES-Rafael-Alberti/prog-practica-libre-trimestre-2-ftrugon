@@ -19,12 +19,15 @@ fun main() {
     )
 
     val armas = listOf(
-        Escopeta(8,1),
-        EscopetaDobleCanon(2,2),
-        Revolver(6,1)
+        Escopeta(8,1,"Escopeta"),
+        EscopetaDobleCanon(2,2,"Escopeta de doble cañon"),
+        Revolver(6,1,"Revolver")
     )
 
-    val vida = Random.nextInt(3, 999)
+    val gestionInfoPartida = GestionInfoPartida()
+    gestionInfoPartida.inicializaDatosArmas(armas)
+
+    val vida = Random.nextInt(3, 9)
 
 
     val jugador1 = Jugador("Fran", vida,gestionConsola)
@@ -37,11 +40,12 @@ fun main() {
     )
 
 
-    val partida = Partida(listaJugadores,armas,todosObjetos,gestionConsola)
+    val partida = Partida(listaJugadores,armas,todosObjetos,gestionConsola,gestionInfoPartida)
 
 
     partida.iniciarPartida()
 
 
+    println("hola")
 }
 

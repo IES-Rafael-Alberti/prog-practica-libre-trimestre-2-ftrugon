@@ -11,7 +11,8 @@ open class Partida(
     val jugadores: MutableList<Jugador>,
     val listaArmas: List<Arma>,
     val listaobjetos: List<Objeto>,
-    val gestionConsola: Consola
+    val gestionConsola: Consola,
+    val infoPartida: GestionInfoPartida
 ) {
 
     private var estadoPartida = false
@@ -22,7 +23,7 @@ open class Partida(
 
     init {
         if (jugadores.size == 1){
-            jugadores.add(Ia(this,"dealer",999,gestionConsola))
+            jugadores.add(Ia(this,"dealer",jugadores[0].vida,gestionConsola))
           //  jugadores.add(Ia(this,"paco",999,gestionConsola))
         }
     }
@@ -103,6 +104,7 @@ open class Partida(
 
 
     open fun reasignarCargadores(){
+        infoPartida.registrarAccionArma(arma.tipo,"Reasignar cargador")
         listaArmas.forEach {
             it.cargador = it.recargar()
         }
@@ -114,6 +116,9 @@ open class Partida(
 
 
     open fun gestiorarDisparo(opcion:Int,jugador: Jugador){
+
+        infoPartida.registrarAccionArma(arma.tipo,"Disparo")
+
         if (opcion == 1) {
             dispararme(jugador, danio)
         } else {
