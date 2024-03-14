@@ -45,7 +45,7 @@ fun main() {
 
     partida.iniciarPartida()
 
-
+    gestionInfoPartida.almacenarResultado("resultado.txt")
     println("hola")
 }
 

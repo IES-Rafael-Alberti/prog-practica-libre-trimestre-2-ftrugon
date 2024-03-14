@@ -1,0 +1,6 @@
+Historial de acciones de armas:
+Escopeta: Disparo, Disparo, Disparo, Reasignar cargador
+Escopeta de doble cañon: 
+Revolver: Disparo, Disparo, Disparo, Reasignar cargador, Disparo, Disparo, Disparo, Disparo, Disparo, Reasignar cargador, Disparo, Disparo, Disparo, Disparo, Reasignar cargador, Disparo, Disparo, Disparo, Reasignar cargador, Disparo, Disparo, Disparo, Disparo, Disparo, Disparo, Reasignar cargador, Disparo
+
+Historial de acciones de jugadores:

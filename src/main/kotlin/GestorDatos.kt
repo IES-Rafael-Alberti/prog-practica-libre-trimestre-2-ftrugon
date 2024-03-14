@@ -1,3 +1,5 @@
+import java.io.File
+
 /**
  * Interfaz que deben implementar las clases que quieran gestionar la información de la Carrera
  */
@@ -44,6 +46,8 @@ class GestionInfoPartida : InformacionPartida {
     }
 
 
+
+
     fun almacenarResultado(nombreArchivo: String) {
         val resultado = StringBuilder()
 
@@ -67,5 +71,6 @@ class GestionInfoPartida : InformacionPartida {
             println("Ocurrió un error al almacenar el resultado de la partida: ${ex.message}")
         }
     }
+
 
 }

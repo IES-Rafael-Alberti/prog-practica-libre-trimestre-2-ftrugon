@@ -182,7 +182,7 @@ class Ia(
                     cont++
                 }
             }
-            in 0..70 -> {
+            in 1..70 -> {
                 cont = 0
                 for (objeto in objetos){
                     if (objeto is Refresco){
