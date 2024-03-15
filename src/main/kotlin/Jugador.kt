@@ -8,8 +8,8 @@
  * Por defecto, esta lista está vacía.
  */
 open class Jugador(
-    val nombre: String,
-    var vida: Int,
+    private val nombre: String,
+    private var vida: Int,
     val gestionConsola: Consola,
     val objetos: MutableList<Objeto> = mutableListOf<Objeto>()
 ){
@@ -19,6 +19,10 @@ open class Jugador(
         require(nombre.isNotEmpty()){"El nombre no puede estar vacio"}
         require(nombre.uppercase() !in listaDeNombresNoPermitidos) {"El nombre no puede ser dealer,dios o satan"}
     }
+
+
+    fun obtenerVida() = vida
+    fun obtenerNombre() = nombre
 
     /**
      * Reduce la vida del jugador según el daño recibido.

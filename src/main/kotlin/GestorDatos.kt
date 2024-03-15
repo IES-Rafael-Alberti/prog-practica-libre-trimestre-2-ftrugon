@@ -81,12 +81,12 @@ class GestionInfoPartida : InformacionPartida {
 
     override fun <T : Jugador> inicializaDatosJugadores(jugadores: List<T>) {
         jugadores.forEach {
-            historialAccionesjugadores[it.nombre] = mutableListOf()
+            historialAccionesjugadores[it.obtenerNombre()] = mutableListOf()
         }
     }
 
     override fun registrarAccionJugador(jugador: Jugador, accion: String) {
-        historialAccionesjugadores[jugador.nombre]?.add(accion)
+        historialAccionesjugadores[jugador.obtenerNombre()]?.add(accion)
     }
 
 

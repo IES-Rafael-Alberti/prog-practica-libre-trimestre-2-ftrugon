@@ -125,9 +125,9 @@ class GestionConsola(private val terminal: Terminal):Consola {
         }else println("$numbalas estan cargadas")
 
         // Imprimir información sobre la ronda y los jugadores
-        println("-------------------------Ronda $ronda, ${jugador.nombre}---------------------------")
-        println("${jugadores[0].nombre}:${jugadores[0].vida}")
-        println("${jugadores[1].nombre}:${jugadores[1].vida}")
+        println("-------------------------Ronda $ronda, ${jugador.obtenerNombre()}---------------------------")
+        println("${jugadores[0].obtenerNombre()}:${jugadores[0].obtenerVida()}")
+        println("${jugadores[1].obtenerNombre()}:${jugadores[1].obtenerVida()}")
     }
 
     override fun mostrarInventario(jugador: Jugador){
@@ -159,10 +159,10 @@ class GestionConsola(private val terminal: Terminal):Consola {
         println("**** SE VAN A AÑADIR OBJETOS A LOS INVENTARIOS ****")
     }
 
-    override fun saltarTurno(jugador: Jugador) = println("Se ha saltado el turno de ${jugador.nombre}")
+    override fun saltarTurno(jugador: Jugador) = println("Se ha saltado el turno de ${jugador.obtenerNombre()}")
 
     override fun tienesQueUsarobjeto(jugador: Jugador): String {
-        return "Usa algun objeto ${jugador.nombre}, no puedes tener mas de 8"
+        return "Usa algun objeto ${jugador.obtenerNombre()}, no puedes tener mas de 8"
     }
 
     override fun noUsarNada() = println("No has usado nada")

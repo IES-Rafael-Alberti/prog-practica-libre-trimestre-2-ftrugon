@@ -29,7 +29,7 @@ class Partida(
     init {
         // Si solo hay un jugador, se agrega un jugador IA
         if (jugadores.size == 1){
-            jugadores.add(Ia(this,"dealer",jugadores[0].vida,gestionConsola))
+            jugadores.add(Ia(this,"dealer",jugadores[0].obtenerVida(),gestionConsola))
         }
     }
 
@@ -258,7 +258,7 @@ class Partida(
         // Verificar algun jugador tiene 0 de vida
         for (jugador in jugadores) {
 
-            if (jugador.vida <= 0) return true
+            if (jugador.obtenerVida() <= 0) return true
         }
         return false
     }

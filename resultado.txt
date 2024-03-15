@@ -1,8 +1,8 @@
 Historial de acciones de armas:
-Escopeta: 
-Escopeta de doble cañon: 
-Revolver: Disparo, Disparo, Disparo, Disparo, Disparo
+Escopeta: Disparo, Disparo, Disparo, Disparo, Disparo, Disparo, Reasignar cargador, Disparo, Disparo, Disparo, Reasignar cargador, Disparo, Disparo, Disparo, Disparo, Reasignar cargador
+Escopeta de doble cañon: Disparo, Reasignar cargador
+Revolver: Disparo, Disparo, Disparo, Disparo, Reasignar cargador, Disparo, Disparo, Disparo, Reasignar cargador, Disparo, Disparo, Disparo, Disparo
 
 Historial de acciones de jugadores:
-fran: Disparar al oponente, Disparar al oponente
-dealer: Disparar al oponente, Disparar al oponente, Disparar al oponente
+fran: Dispararse, Dispararse, Dispararse, Disparar al oponente, Dispararse, Dispararse, Dispararse, Disparar al oponente, Disparar al oponente, Disparar al oponente, Disparar al oponente, Disparar al oponente, Dispararse, Disparar al oponente, Disparar al oponente
+paco: Dispararse, Disparar al oponente, Dispararse, Dispararse, Disparar al oponente, Disparar al oponente, Disparar al oponente, Dispararse, Disparar al oponente, Disparar al oponente
