@@ -2,30 +2,114 @@ import com.github.ajalt.mordant.rendering.TextColors
 import com.github.ajalt.mordant.terminal.Terminal
 
 
+
 /**
- * Como la partida tambien se va a poder jugar contra una IA pues hago una interfaz
- * y a la partida ,dependiendo si eliges jugar solo o contra alguien usara una gestion de consola u otro
+ * Interfaz que define métodos para interactuar con la consola durante el programa
  */
-interface Consola{
-    fun mostrarCosas(arma:Arma,jugadores: List<Jugador>, jugador: Jugador,ronda:Int)
+interface Consola {
+    /**
+     * Muestra información relevante sobre el estado de la partida, como el arma, los jugadores, el jugador actual y la ronda.
+     *
+     * @param arma El arma actualmente en uso.
+     * @param jugadores La lista de jugadores en la partida.
+     * @param jugador El jugador actual.
+     * @param ronda El número de la ronda actual.
+     */
+    fun mostrarCosas(arma: Arma, jugadores: List<Jugador>, jugador: Jugador, ronda: Int)
+
+    /**
+     * Muestra el inventario del jugador actual.
+     *
+     * @param jugador El jugador del cual mostrar el inventario.
+     */
     fun mostrarInventario(jugador: Jugador)
+
+    /**
+     * Muestra las opciones de disparo disponibles para el jugador actual.
+     */
     fun opcionesDisparo()
+
+    /**
+     * Informa al usuario que la opción seleccionada no es válida.
+     */
     fun opcionNoValida()
+
+    /**
+     * Informa al usuario que la respuesta proporcionada no es válida.
+     */
     fun respuestaNoValida()
+
+    /**
+     * Informa al usuario que no tiene objetos para usar en este momento.
+     */
     fun sinObjetosUsar()
+
+    /**
+     * Solicita al usuario que seleccione objetos para añadir a su inventario.
+     */
     fun anadirObjetos()
+
+    /**
+     * Permite al jugador saltar su turno.
+     *
+     * @param jugador El jugador que desea saltar su turno.
+     */
     fun saltarTurno(jugador: Jugador)
-    fun tienesQueUsarobjeto(jugador: Jugador):String
+
+    /**
+     * Informa al jugador que debe usar un objeto en su inventario.
+     *
+     * @param jugador El jugador que debe usar un objeto.
+     * @return Un mensaje indicando que el jugador debe usar un objeto.
+     */
+    fun tienesQueUsarobjeto(jugador: Jugador): String
+
+    /**
+     * Informa al jugador que no debe usar ningún objeto en este momento.
+     */
     fun noUsarNada()
+
+    /**
+     * Representa visualmente el resultado de un disparo, indicando si ha sido exitoso o no.
+     *
+     * @param boolean `true` si el disparo ha sido exitoso, `false` en caso contrario.
+     */
     fun clicOBoom(boolean: Boolean)
+
+    /**
+     * Muestra los puntos de vida de los jugadores entre disparos.
+     */
     fun puntosEntreDisparos()
-    fun printearMensajeObjeto(mensaje:String)
-    fun printearNum(num:Int)
+
+    /**
+     * Imprime un mensaje relacionado con un objeto en la consola.
+     *
+     * @param mensaje El mensaje a imprimir.
+     */
+    fun printearMensajeObjeto(mensaje: String)
+
+    /**
+     * Imprime un número en la consola.
+     *
+     * @param num El número a imprimir.
+     */
+    fun printearNum(num: Int)
+
+    /**
+     * Informa al jugador que ha ocurrido un error al usar un refresco.
+     */
     fun mostrarErrorRefresco()
+
+    /**
+     * Presenta al usuario la opción de jugar solo o contra alguien.
+     */
+    fun jugarSoloOContraAlguien()
 }
 
-
-class GestionConsola(val terminal: Terminal):Consola {
+/**
+ * GestionConsola basicamente implementa lo de la interfaz
+ */
+class GestionConsola(private val terminal: Terminal):Consola {
 
     override fun mostrarCosas(arma:Arma, jugadores: List<Jugador>, jugador: Jugador, ronda:Int){
         // Imprimir el arma a usar y sus balas
@@ -105,4 +189,11 @@ class GestionConsola(val terminal: Terminal):Consola {
     override fun printearNum(num:Int) = println(num)
 
     override fun mostrarErrorRefresco() = println("No puedes usar el refresco si no hay balas")
+
+    override fun jugarSoloOContraAlguien(){
+        println("Que quieres hacer?")
+        println("1. Jugar solo")
+        println("2. Jugar contra alguien ")
+        print("Y bien?: ")
+    }
 }
