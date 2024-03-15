@@ -79,6 +79,7 @@ gestionConsola.jugarSoloOContraAlguien()
 
 gestionInfoPartida.almacenarResultado("resultado.txt")
 
+https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-ftrugon/blob/ca153ac90015032e91c6cd777b77b07403ec0111/src/main/kotlin/Main.kt#L88
 
 #### **Criterio global 2: Crear y llamar métodos estáticos**
 - **(4.i)**: ¿Has definido algún método/propiedad estático en tu proyecto? ¿Cuál era el objetivo y por qué consideraste que debía ser estático en lugar de un método/propiedad de instancia?
