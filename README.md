@@ -67,6 +67,19 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
 #### **Criterio global 1: Instancia objetos y hacer uso de ellos**
 - **(2.a, 2.b, 2.c, 2.d, 2.f, 2.h, 4.f, 4.a)**: Describe cómo has instanciado y utilizado objetos en tu proyecto. ¿Cómo has aplicado los constructores y pasado parámetros a los métodos? Proporciona ejemplos específicos de tu código.
 
+Haber pues la gran mayoria de mis objetos estan en main, ya que para que la partida se inicie necesita de todos los objetos necesarios
+
+val partida = Partida(listaJugadores,armas,todosObjetos,gestionConsola,gestionInfoPartida)
+
+No he hecho esto 
+val partida = Partida(listaJugadores,armas,todosObjetos,GestionConsola(),GestionInfoPartida())
+Porque tanto GestionConsola y GestionInfoPartida tienen metodos fuera de la partida,
+
+gestionConsola.jugarSoloOContraAlguien()
+
+gestionInfoPartida.almacenarResultado("resultado.txt")
+
+
 #### **Criterio global 2: Crear y llamar métodos estáticos**
 - **(4.i)**: ¿Has definido algún método/propiedad estático en tu proyecto? ¿Cuál era el objetivo y por qué consideraste que debía ser estático en lugar de un método/propiedad de instancia?
 - **(2.e)**: ¿En qué parte del código se llama a un método estático o se utiliza la propiedad estática?
