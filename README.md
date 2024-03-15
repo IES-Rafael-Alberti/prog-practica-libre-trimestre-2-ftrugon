@@ -91,14 +91,22 @@ https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-ftrugon/bl
 https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-ftrugon/blob/58b5d338e9518caa9553eb8f10faf851c5d6bc6d/src/main/kotlin/Main.kt#L94
 
 -- Constructores
+
 Los constructores son para inicializar las instancias de las clases, proporcionan la informacion necesaria como para configurar bien al objeto
+
+https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-ftrugon/blob/764668f50417205816dcf73ce241714fc4cd73bf/src/main/kotlin/Partida.kt#L14-L20
 
 Ninguna propiedad de las clases excepto los objetos del usuario son iniciadas por defecto
 
 val jugador1 = Jugador("Fran", vida, gestionConsola)
 
 -- Pasar parametros a metodos
+
 Realmente aqui reside todo, si no pasas bien los parametros a las funciones o no sabes a lo que te estas refiriendo en cada momento o su tipo,estas perdido
+
+https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-ftrugon/blob/764668f50417205816dcf73ce241714fc4cd73bf/src/main/kotlin/Arma.kt#L39
+
+por ejemplo aqui le paso num balas que es el tamaño maximo del cargador y crea un cargador aletorio
 
 En la mayoria de las funciones tienes que pasar cosas por parametros
 
@@ -106,11 +114,52 @@ En la mayoria de las funciones tienes que pasar cosas por parametros
 - **(4.i)**: ¿Has definido algún método/propiedad estático en tu proyecto? ¿Cuál era el objetivo y por qué consideraste que debía ser estático en lugar de un método/propiedad de instancia?
 - **(2.e)**: ¿En qué parte del código se llama a un método estático o se utiliza la propiedad estática?
 
+En mi proyecto no he usado metodos estaticos, no he visto la necesidad
+,Pero si en lugar de tratar al jugador por su nombre tubiera id y lo tratara por id, como la id es unica por jugador
+podria hacer un companion object para hacer que la id sea unica por cada jugador, con un metodo de anadirId y cada vez que se inicialice un nuevo jugador llamarla
+
+Tambien podria haberlo hecho en arma, pero como el jugador nunca va a instanciar un arma, nunca va a decidir el cargador maximo asi que prefiero que sea una propiedad y hacer una lista con las armas 
+
+https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-ftrugon/blob/764668f50417205816dcf73ce241714fc4cd73bf/src/main/kotlin/Main.kt#L41-L45
+
+creo que otro ejemplo es que las partidas tengan IDS y cuando se almacenan en resultado.txt, en lugar dee sobreescribir el archivo , que se le una con la id
+https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-ftrugon/blob/764668f50417205816dcf73ce241714fc4cd73bf/src/main/kotlin/GestorDatos.kt#L115
+
+Seria cambiar esta linea, en lugar de writeText pues append
+
+y para la id de la partida seria igual que el usuario
+
 #### **Criterio global 3: Uso de entornos**
 - **(2.i)**: ¿Cómo utilizaste el IDE para el desarrollo de tu proyecto? Describe el proceso de creación, compilación, y prueba de tu programa.
 
+Haber el IDE tampoco ayuda mucho a no ser que sea depurando y cuando tienes errores en algo, que te dice como solucionarlo o como optimizar algo de codigo
+La compilacion suele ser lenta ya que el proyecto esta en gradle por tanto probar el programa, tambien suele ser algo lento
+
+la depuracion definitivamente ha sido mi mejor amiga, sobretodo para hacer la IA
+ya que no sabia como calcular el chance por ronda, ya que usar algun item requiere que el chance sea 100 o 0 directamente
+Asi que cada vez que la IA se ponia a meterse tiros ronda por ronda asta la muerte me ponia a depurar y ver que pasaba
+Asta que llegue a esto
+
+https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-ftrugon/blob/764668f50417205816dcf73ce241714fc4cd73bf/src/main/kotlin/Jugador.kt#L190-L198
+
 #### **Criterio global 4: Definir clases y su contenido**
 - **(4.b, 4.c, 4.d, 4.g)**: Explica sobre un ejemplo de tu código, cómo definiste las clases en tu proyecto, es decir como identificaste las de propiedades, métodos y constructores y modificadores del control de acceso a métodos y propiedades, para representar al objeto del mundo real. ¿Cómo contribuyen estas clases a la solución del problema que tu aplicación aborda?
+
+Empece con la clase arma, ya que para jugar se necesita un arma, como hay mas de un arma sera una clase abstracta
+
+https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-ftrugon/blob/764668f50417205816dcf73ce241714fc4cd73bf/src/main/kotlin/Arma.kt#L10
+
+al pasarle los parametros al arma me di cuenta que necesitaba un jugador el cual reciba el daño, En ese momento solo guardaba datos asi que era una data class
+
+al seguir desarrollando arma me di cuenta que necesitaba las balas, y si estaban cargadas o no
+
+https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-ftrugon/blob/764668f50417205816dcf73ce241714fc4cd73bf/src/main/kotlin/Cartucho.kt#L5
+
+y como no queria hacerlo todo dentro del main hice la clase partida, de primeras solo se le pasaba la lista de jugadores y una escopeta, ya que en la primera version solo habia 1 escopeta
+
+https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-ftrugon/blob/764668f50417205816dcf73ce241714fc4cd73bf/src/main/kotlin/Cartucho.kt#L5
+
+com
 
 #### **Criterio global 5: Herencia y uso de clases abstractas e interfaces**
 - **(4.h, 4.j, 7.a, 7.b, 7.c)**: Describe sobre tu código cómo has implementado la herencia o utilizado interfaces en tu proyecto. ¿Por qué elegiste este enfoque y cómo beneficia a la estructura de tu aplicación? ¿De qué manera has utilizado los principios SOLID para mejorar el diseño de tu proyecto? ¿Mostrando tu código, contesta a qué principios has utilizado y qué beneficio has obtenido?
