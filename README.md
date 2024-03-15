@@ -67,19 +67,40 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
 #### **Criterio global 1: Instancia objetos y hacer uso de ellos**
 - **(2.a, 2.b, 2.c, 2.d, 2.f, 2.h, 4.f, 4.a)**: Describe cómo has instanciado y utilizado objetos en tu proyecto. ¿Cómo has aplicado los constructores y pasado parámetros a los métodos? Proporciona ejemplos específicos de tu código.
 
-Haber pues la gran mayoria de mis objetos estan en main, ya que para que la partida se inicie necesita de todos los objetos necesarios
+-- Instanciar y usar objetos
+He instanciado y utilizado objetos de diversas clases para representar elementos del juego, como jugadores, armas, objetos y la propia partida, tambien he usado una clase para la gestion de la consola y todo lo que tenga que ver en mostrar cosas por pantalla, por ultimo el gestor de datos es para almacenar los datos en resultado.txt
 
-val partida = Partida(listaJugadores,armas,todosObjetos,gestionConsola,gestionInfoPartida)
+Todos mis objetos estan instanciados en main, ya que para que la partida se inicie necesita de todos los objetos necesarios
 
-No he hecho esto 
+https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-ftrugon/blob/58b5d338e9518caa9553eb8f10faf851c5d6bc6d/src/main/kotlin/Main.kt#L30-L48
+
+https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-ftrugon/blob/58b5d338e9518caa9553eb8f10faf851c5d6bc6d/src/main/kotlin/Main.kt#L57
+
+https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-ftrugon/blob/58b5d338e9518caa9553eb8f10faf851c5d6bc6d/src/main/kotlin/Main.kt#L66
+
+https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-ftrugon/blob/58b5d338e9518caa9553eb8f10faf851c5d6bc6d/src/main/kotlin/Main.kt#L88
+
+No he hecho
+
 val partida = Partida(listaJugadores,armas,todosObjetos,GestionConsola(),GestionInfoPartida())
-Porque tanto GestionConsola y GestionInfoPartida tienen metodos fuera de la partida,
 
-gestionConsola.jugarSoloOContraAlguien()
+Porque tanto GestionConsola y GestionInfoPartida tienen metodos fuera de la partida
 
-gestionInfoPartida.almacenarResultado("resultado.txt")
+https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-ftrugon/blob/58b5d338e9518caa9553eb8f10faf851c5d6bc6d/src/main/kotlin/Main.kt#L53
 
-https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-ftrugon/blob/ca153ac90015032e91c6cd777b77b07403ec0111/src/main/kotlin/Main.kt#L88
+https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-ftrugon/blob/58b5d338e9518caa9553eb8f10faf851c5d6bc6d/src/main/kotlin/Main.kt#L94
+
+-- Constructores
+Los constructores son para inicializar las instancias de las clases, proporcionan la informacion necesaria como para configurar bien al objeto
+
+Ninguna propiedad de las clases excepto los objetos del usuario son iniciadas por defecto
+
+val jugador1 = Jugador("Fran", vida, gestionConsola)
+
+-- Pasar parametros a metodos
+Realmente aqui reside todo, si no pasas bien los parametros a las funciones o no sabes a lo que te estas refiriendo en cada momento o su tipo,estas perdido
+
+En la mayoria de las funciones tienes que pasar cosas por parametros
 
 #### **Criterio global 2: Crear y llamar métodos estáticos**
 - **(4.i)**: ¿Has definido algún método/propiedad estático en tu proyecto? ¿Cuál era el objetivo y por qué consideraste que debía ser estático en lugar de un método/propiedad de instancia?
