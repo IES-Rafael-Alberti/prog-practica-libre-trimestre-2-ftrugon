@@ -198,7 +198,7 @@ class Partida(
         infoPartida.registrarAccionJugador(jug, "Dispararse")
 
         // Verificar si el disparo es exitoso
-        val estabaCargado = arma.disparo()
+        val estabaCargado = arma.disparo(arma.cargador)
 
         // Mostrar mensaje indicando si el disparo fue exitoso o no
         gestionConsola.clicOBoom(estabaCargado)
@@ -220,7 +220,7 @@ class Partida(
         infoPartida.registrarAccionJugador(jug, "Disparar al oponente")
 
         // Verificar si el disparo es exitoso
-        val estabaCargado = arma.disparo()
+        val estabaCargado = arma.disparo(arma.cargador)
 
         // Mostrar mensaje indicando si el disparo fue exitoso o no
         gestionConsola.clicOBoom(estabaCargado)

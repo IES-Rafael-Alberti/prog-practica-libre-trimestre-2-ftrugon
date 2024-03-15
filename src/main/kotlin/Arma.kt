@@ -72,9 +72,12 @@ abstract class Arma(val capacidaMaxima:Int, var danio:Int,val tipo:String) {
 
     /**
      * Método para realizar un disparo con la escopeta.
+     *
+     * @param cargador el cargaddor del que se comprueba la primera bala
+     *
      * @return true si el disparo fue exitoso (cartucho cargado), false si no hay cartucho cargado.
      */
-    fun disparo(): Boolean {
+    fun disparo(cargador:MutableList<Cartucho>): Boolean {
         // Verificar si hay un cartucho cargado en el tambor y siempre resta una bala
         return if (cargador[0].cargado) {
             restarBala()
